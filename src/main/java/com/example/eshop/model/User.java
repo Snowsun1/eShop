@@ -1,12 +1,16 @@
 package com.example.eshop.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
-@Entity(name = "user")
+@Entity(name = "users")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +25,9 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     @Email
     private String email;
+
+    @Column(name = "balance", nullable = false)
+    private int balance;
 
     @Column(name = "address", nullable = false)
     private String address;
