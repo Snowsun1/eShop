@@ -24,4 +24,6 @@ public class Product {
     public Product() {
 
     }
+
+    private Double price;
 }
