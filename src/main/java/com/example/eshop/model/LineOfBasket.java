@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity(name = "part_of_order")
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PartOfOrder {
+public class LineOfBasket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,4 +18,5 @@ public class PartOfOrder {
     private int count;
     @Column(name = "product_id")
     private Long productId;
+
 }

@@ -1,4 +1,9 @@
 package com.example.eshop.repository;
 
-public interface PartOfOrderRepository {
+import com.example.eshop.model.PartOfOrder;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PartOfOrderRepository extends CrudRepository<PartOfOrder, Long> {
 }
