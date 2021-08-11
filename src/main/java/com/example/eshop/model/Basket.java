@@ -4,29 +4,29 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "basket")
+
+@Entity(name = "baskets")
 @Data
 public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date_of_order", nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfOrder;
-
     @Column(nullable = false)
-    private double price;
+    private double cost;
+
+    private boolean paid;
+
+    private boolean delivery;
 
     @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE})
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id") // oto
     private User user;
 
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE})
-    @JoinColumn(name = "line_of_basket_id")
-    private List<LineOfBasket> linesOfBasket = new ArrayList<>();
+    @JoinColumn(name = "order_id")
+    private List<LineOfBasket> bankCards = new ArrayList<>();
 }
