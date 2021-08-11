@@ -21,7 +21,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editUser(User user) {
-        // как будет лучше, создавать юзера, брать у него всё и потом удалять или же сразу передавать поля?
+    public void editUser(User user, Long id) {
+        User thisUser = userRepository.findById(id).orElse(null);
+        if (thisUser != null) {
+            thisUser.setName(user.getName());
+            thisUser.setAddress(user.getAddress());
+            thisUser.setEmail(user.getEmail());
+            thisUser.setSurname(user.getSurname());
+        }
     }
 }
