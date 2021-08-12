@@ -1,13 +1,19 @@
 package com.example.eshop.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
-@Entity(name = "user")
+@Entity
+@Table(name = "user", schema = "eshop")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
+    @Column(name = "user_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,6 +27,9 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     @Email
     private String email;
+
+    @Column(name = "balance", nullable = false)
+    private int balance;
 
     @Column(name = "address", nullable = false)
     private String address;

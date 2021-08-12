@@ -2,13 +2,17 @@ package com.example.eshop.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity(name = "product_category")
+@Entity
+@Table(name = "product_category", schema = "eshop")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProductCategory {
+    @Column(name = "product_category_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,12 +20,5 @@ public class ProductCategory {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "count", nullable = false)
-    private int count;
-
     // TODO Возможно нужна OneToMany
-
-    public ProductCategory() {
-
-    }
 }
