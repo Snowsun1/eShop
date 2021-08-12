@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
-@Entity(name = "users")
+@Entity
+@Table(name = "users", schema = "eshop")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

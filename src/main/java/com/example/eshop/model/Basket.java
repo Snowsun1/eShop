@@ -1,6 +1,5 @@
 package com.example.eshop.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(name = "baskets")
+@Entity
+@Table(name = "baskets", schema = "eshop")
 @Data
 public class Basket {
     @Id

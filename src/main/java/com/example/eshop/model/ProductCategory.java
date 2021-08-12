@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity(name = "product_category")
+@Entity
+@Table(name = "product_category", schema = "eshop")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
