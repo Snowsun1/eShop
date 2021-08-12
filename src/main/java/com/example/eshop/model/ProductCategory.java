@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductCategory {
+    @Column(name = "product_category_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
+    @Column(name = "product_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
