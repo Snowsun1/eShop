@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 @Entity
-        @Table(name = "product", schema = "eshop")
+@Table(name = "product", schema = "eshop")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
