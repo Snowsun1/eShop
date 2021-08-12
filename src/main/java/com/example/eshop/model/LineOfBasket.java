@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "line_of_basket", schema = "eshop")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
