@@ -9,7 +9,8 @@ import java.util.Collection;
 import java.util.Set;
 
 
-@Entity(name = "product")
+@Entity
+        @Table(name = "product", schema = "eshop")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

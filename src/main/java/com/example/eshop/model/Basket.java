@@ -8,7 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "basket")
+@Entity
+@Table(name = "basket", schema = "eshop")
 @Data
 public class Basket {
     @Id
