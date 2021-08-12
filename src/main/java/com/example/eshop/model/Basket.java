@@ -8,9 +8,10 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "baskets", schema = "eshop")
+@Table(name = "basket", schema = "eshop")
 @Data
 public class Basket {
+    @Column(name = "basket_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +28,6 @@ public class Basket {
     private User user;
 
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE})
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "basket_id")
     private List<LineOfBasket> bankCards = new ArrayList<>();
 }

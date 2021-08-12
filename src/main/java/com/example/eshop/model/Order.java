@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
+    @Column(name = "order_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -24,6 +25,7 @@ public class Order {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfOrder;
     @OneToOne
+    @JoinColumn(name = "basket_id")
     private Basket basket;
 
 

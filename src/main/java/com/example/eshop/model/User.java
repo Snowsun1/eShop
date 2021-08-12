@@ -8,11 +8,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
-@Table(name = "users", schema = "eshop")
+@Table(name = "user", schema = "eshop")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+    @Column(name = "user_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
