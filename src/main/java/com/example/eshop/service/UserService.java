@@ -1,5 +1,6 @@
 package com.example.eshop.service;
 
+<<<<<<< HEAD
 import com.example.eshop.model.User;
 
 public interface UserService {
@@ -8,4 +9,9 @@ public interface UserService {
     void saveUser(User user);
 
     void editUser(User user);
+=======
+public interface UserService {
+
+
+>>>>>>> Dmitriy
 }
