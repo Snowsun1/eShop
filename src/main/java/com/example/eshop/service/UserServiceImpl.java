@@ -1,5 +1,6 @@
 package com.example.eshop.service;
 
+import com.example.eshop.exception.UserNotFoundException;
 import com.example.eshop.model.LineOfBasket;
 import com.example.eshop.model.User;
 import com.example.eshop.repository.UserRepository;
@@ -14,8 +15,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(Long id) {
-        userRepository.findById(id);
-        return userRepository.findUserById(id).isPresent() ? userRepository.findUserById(id).get() : null;
+        return userRepository.findUserById(id).orElseThrow(() -> new UserNotFoundException(("Пользователь с id = " + id + " не найден!")));
     }
 
     @Override
@@ -25,13 +25,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editUser(User user, Long id) {
-        User thisUser = userRepository.findById(id).orElse(null);
-        if (thisUser != null) {
-            thisUser.setName(user.getName());
-            thisUser.setAddress(user.getAddress());
-            thisUser.setEmail(user.getEmail());
-            thisUser.setBalance(user.getBalance()); // Стоит ли
-            thisUser.setSurname(user.getSurname());
-        }
+        User thisUser = userRepository.findUserById(id)
+                .orElseThrow(() -> new UserNotFoundException(("Пользователь с id = " + id + " не найден!")));
+        thisUser.setName(user.getName());
+        thisUser.setAddress(user.getAddress());
+        thisUser.setEmail(user.getEmail());
+        thisUser.setBalance(user.getBalance()); // Стоит ли
+        thisUser.setSurname(user.getSurname());
     }
 }
