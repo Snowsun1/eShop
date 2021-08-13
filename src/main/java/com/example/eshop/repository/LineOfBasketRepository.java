@@ -6,10 +6,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LineOfBasketRepository extends CrudRepository<LineOfBasket, Long> {
-    LineOfBasket findLineOfBasketById(Long id);
+    Optional<LineOfBasket> findLineOfBasketById(Long id);
     @Query(value = "select * from line_of_basket where basket_id == ?1", nativeQuery = true)
-    List<LineOfBasket> findLineOfBasketByBasketId(Long id);
+    Optional<List<LineOfBasket>> findLineOfBasketByBasketId(Long id);
 }
