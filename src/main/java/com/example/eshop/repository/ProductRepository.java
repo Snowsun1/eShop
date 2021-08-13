@@ -14,5 +14,5 @@ import java.util.List;
 public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findProductByCountIsAfter(int count);
 
-    List<Product> findAllByProductCategory(ProductCategory productCategory);
+    List<Product> findAllByProductCategoryId(Long productCategory_id);
 }

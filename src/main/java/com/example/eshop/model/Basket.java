@@ -29,5 +29,5 @@ public class Basket {
 
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE})
     @JoinColumn(name = "basket_id")
-    private List<LineOfBasket> bankCards = new ArrayList<>();
+    private List<LineOfBasket> list = new ArrayList<>();
 }
