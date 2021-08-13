@@ -2,6 +2,7 @@ package com.example.eshop.service;
 
 import com.example.eshop.model.Product;
 import com.example.eshop.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,32 +10,38 @@ import org.springframework.transaction.annotation.Transactional;
  * Add implementation for product service.
  */
 @Service
-@Transactional // looks like @Transactional from Spring is preferable
+@Transactional
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService{
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    @Override
+    public Product createProduct(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
-    public Product createProduct() {
-        return new Product();
+    public Product editProduct(Product product, Long id) {
+        Product newProduct = productRepository.findById(id).orElse(null);
+
+        if (product != null){
+            newProduct.setName(product.getName());
+            newProduct.setCount(product.getCount());
+            newProduct.setPrice(product.getPrice());
+            newProduct.setProductCategory(product.getProductCategory());
+        }
+
+        return newProduct;
     }
 
     @Override
-    public Product editProduct(long id) {
-        return productRepository.save(productRepository.findById(id).orElseThrow());
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
     }
 
     @Override
-    public void deleteProduct(long id) {
-        productRepository.delete(productRepository.findById(id).orElseThrow());
-    }
-
-    @Override
-    public Product getProduct(long id) {
+    public Product getProduct(Long id) {
         return productRepository.findById(id).orElseThrow();
     }
 

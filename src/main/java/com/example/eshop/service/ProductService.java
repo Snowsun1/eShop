@@ -12,13 +12,13 @@ import javax.validation.constraints.NotNull;
 @Validated
 public interface ProductService {
 
-    Product createProduct();
+    Product createProduct(Product product);
 
-    Product editProduct(long id);
+    Product editProduct(Product product, Long id);
 
-    void deleteProduct(long id);
+    void deleteProduct(Long id);
 
-    Product getProduct(@Min(value = 1L) long id);
+    Product getProduct(@Min(value = 1L) Long id);
 
     @NotNull
     Iterable<Product> getAllProducts();
