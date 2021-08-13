@@ -22,10 +22,10 @@ public class BasketController {
         return basketService.add(basketId, product, count);
     }
 
-    @PutMapping(value = "/basket/{basket}/{product}/{count}")
-    public Basket update(@PathVariable Basket basket,
+    @PutMapping(value = "/basket/{basketId}/{product}/{count}")
+    public Basket update(@PathVariable Long basketId,
                          @PathVariable Product product,
                          @PathVariable int count){
-        return basketService.update(basket, product, count);
+        return basketService.update(basketId, product, count);
     }
 }
