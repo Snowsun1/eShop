@@ -17,7 +17,7 @@ public class Basket {
     private Long id;
 
     @Column(nullable = false)
-    private double cost;
+    private double totalCost;
 
     private boolean paid;
 
