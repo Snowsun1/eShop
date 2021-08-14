@@ -1,5 +1,7 @@
 package com.example.eshop.service;
 
+import com.example.eshop.exception.ProductNotExists;
+import com.example.eshop.exception.WrongProductCount;
 import com.example.eshop.model.Basket;
 import com.example.eshop.model.LineOfBasket;
 import com.example.eshop.model.Product;
@@ -20,72 +22,50 @@ import java.util.Optional;
 public class BasketServiceImpl implements BasketService{
 
     private final BasketRepository basketRepository;
-    private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
-    private final UserRepository userRepository;
     private final LineOfBasketRepository lineOfBasketRepository;
 
     @Override
-    public Basket add(Long basketId, Product product, int count) {
+    public Basket addProduct(Long userId, Long productId, int count) {
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotExists::new);
+        Double productPrice = product.getPrice();
 
-        Basket basket = basketRepository.findBasketById(basketId);
-        LineOfBasket line = new LineOfBasket();
+        if (count > product.getCount()) throw new WrongProductCount("На складе недостаточное количество товара");
+        if (count < 0) throw new WrongProductCount("Недопустимо отрицательное значение количества товара");
 
-        // проверяем наличие товара в корзине и при наличии увеличиваем на заданное число
-        if (basket.getBankCards().stream().anyMatch(i -> i.getProduct() == product)){
-            basket.getBankCards().forEach(i ->{
-                if (i.getProduct() == product){
-                    i.setCount(i.getCount() + count);
-                }
-            });
-        } else {
-            // если товара нет в списке, то добавляем его
-            line.setProduct(product);
-            basket.getBankCards().add(line);
+        Basket basket = basketRepository.findBasketByUserIdAndPaid(userId, false).orElse(new Basket());
+
+        List<LineOfBasket> lineOfBasketList = basket.getList();
+
+        lineOfBasketList.stream().forEach(lob -> {
+            if (lob.getProduct().getId() == product.getId()){
+                lob.setCount(lob.getCount() + count);
+
+            }
+        });
+
+
+        for (LineOfBasket lineOfBasket : lineOfBasketList ){
+            if (product.getId().equals(lineOfBasket.getProduct().getId())){
+
+            }
         }
 
-        return basketRepository.save(basket);
+        return null;
     }
 
     @Override
-    public Basket update(Long basketId, Product product, int count) {
-
-        // Находим корзину по Id
-        Basket basket = basketRepository.findBasketById(basketId);
-
-        // если корзина есть
-        if (basket != null){
-            basket.getBankCards().forEach(i -> {
-                if (i.getProduct() == product){
-                    i.setCount(count);
-                }
-            });
-            basketRepository.save(basket);
-        } else {
-            // если корзины нет, то возвращаем пустую корзину
-            return new Basket();
-        }
-
-        return basket;
+    public Basket removeProduct(Long userId, Long productId, int count) {
+        return null;
     }
 
     @Override
-    public void delete(Basket basket, Product product, int count) {
-
+    public Basket getBasket(Long userId) {
+        return null;
     }
 
     @Override
-    public Double getTotal(Basket basket) {
-
-        return getBasketPrice(basket);
-    }
-
-    private Double getBasketPrice(Basket basket) {
-
-        List<Double> values = new ArrayList<>();
-        basket.getBankCards().forEach(lineOfBasket ->
-                values.add(lineOfBasket.getProduct().getPrice() * lineOfBasket.getCount()));
-
-        return values.stream().reduce(0.0, Double::sum);
+    public Double getTotalCost(Long userId) {
+        return null;
     }
 }

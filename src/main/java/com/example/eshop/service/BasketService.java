@@ -5,11 +5,11 @@ import com.example.eshop.model.Product;
 
 public interface BasketService {
 
-    Basket add(Long basketId, Product product, int count);
+    Basket addProduct(Long userId, Long productId, int count);
 
-    Basket update(Long basketId, Product product, int count);
+    Basket removeProduct(Long userId, Long productId, int count);
 
-    void delete(Basket basket, Product product, int count);
+    Basket getBasket(Long userId);
 
-    Double getTotal(Basket basket);
+    Double getTotalCost(Long userId);
 }
