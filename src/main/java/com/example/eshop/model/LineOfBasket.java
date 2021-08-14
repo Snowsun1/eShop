@@ -21,5 +21,6 @@ public class LineOfBasket {
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
+    @Column(name = "position_cost")
+    float positionCost;
 }
