@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Data
@@ -28,7 +26,7 @@ public class BasketServiceImpl implements BasketService{
     @Override
     public Basket addProduct(Long userId, Long productId, int count) {
         Product product = productRepository.findById(productId).orElseThrow(ProductNotExists::new);
-        Double productPrice = product.getPrice();
+        double productPrice = product.getPrice();
 
         if (count > product.getCount()) throw new WrongProductCount("На складе недостаточное количество товара");
         if (count < 0) throw new WrongProductCount("Недопустимо отрицательное значение количества товара");
@@ -37,21 +35,25 @@ public class BasketServiceImpl implements BasketService{
 
         List<LineOfBasket> lineOfBasketList = basket.getList();
 
-        lineOfBasketList.stream().forEach(lob -> {
-            if (lob.getProduct().getId() == product.getId()){
+        for (LineOfBasket lob : lineOfBasketList ){
+            if (product.getId().equals(lob.getProduct().getId())){
                 lob.setCount(lob.getCount() + count);
-
-            }
-        });
-
-
-        for (LineOfBasket lineOfBasket : lineOfBasketList ){
-            if (product.getId().equals(lineOfBasket.getProduct().getId())){
-
+                lob.setPositionCost((lob.getCount() + count) * productPrice);
+                basketRepository.save(basket);
+                return basket;
             }
         }
 
-        return null;
+        // если таки продукта в корзине не оказалось
+        LineOfBasket line = new LineOfBasket();
+        line.setProduct(product);
+        line.setCount(count);
+        line.setPositionCost(count * productPrice);
+
+        basket.getList().add(line);
+        basketRepository.save(basket);
+
+        return basket;
     }
 
     @Override
