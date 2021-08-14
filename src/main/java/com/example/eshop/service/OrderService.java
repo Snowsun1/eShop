@@ -1,22 +1,18 @@
 package com.example.eshop.service;
 
 import com.example.eshop.model.Order;
-import org.springframework.validation.annotation.Validated;
+import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
-@Validated
 public interface OrderService {
 
-    // получить список всех заказов
-    @NotNull Iterable<Order> getAllOrders();
+    Order createOrder(Order order);
 
-    // создание заказа
-    Order create(@NotNull @Valid Order order);
+    Order getOrderById(Long id);
 
-    // редактирование заказа
-    void update(@NotNull @Valid Order order);
+    Order updateOrder(Order order, Long id);
 
-    // метод удаления заказа не создаём, поскольку любой заказ сохраняется в истории и нам незачем его удалять
+    void deleteOrder(Order order);
+
+    Iterable<Order> getOrderList();
 }
