@@ -41,6 +41,7 @@ public class BasketServiceImpl implements BasketService{
                 lob.setPositionCost((lob.getCount() + count) * productPrice);
                 // уменьшить количество товара на складе
                 product.setCount(product.getCount() - count);
+                productRepository.save(product);
                 basketRepository.save(basket);
                 return basket;
             }
@@ -54,6 +55,7 @@ public class BasketServiceImpl implements BasketService{
 
         // уменьшить количество товара на складе
         product.setCount(product.getCount() - count);
+        productRepository.save(product);
 
         basket.getList().add(line);
         basketRepository.save(basket);
@@ -77,6 +79,7 @@ public class BasketServiceImpl implements BasketService{
                 lob.setCount(lob.getCount() - count);
                 lob.setPositionCost((lob.getCount() - count) * productPrice);
                 product.setCount(product.getCount() + count);
+                productRepository.save(product);
                 basketRepository.save(basket);
                 return basket;
             }
