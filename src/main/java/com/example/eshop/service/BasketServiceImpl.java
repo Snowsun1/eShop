@@ -39,6 +39,9 @@ public class BasketServiceImpl implements BasketService{
             if (product.getId().equals(lob.getProduct().getId())){
                 lob.setCount(lob.getCount() + count);
                 lob.setPositionCost((lob.getCount() + count) * productPrice);
+                // уменьшить количество товара на складе
+                product.setCount(product.getCount() - count);
+                productRepository.save(product);
                 basketRepository.save(basket);
                 return basket;
             }
@@ -50,6 +53,10 @@ public class BasketServiceImpl implements BasketService{
         line.setCount(count);
         line.setPositionCost(count * productPrice);
 
+        // уменьшить количество товара на складе
+        product.setCount(product.getCount() - count);
+        productRepository.save(product);
+
         basket.getList().add(line);
         basketRepository.save(basket);
 
@@ -58,16 +65,41 @@ public class BasketServiceImpl implements BasketService{
 
     @Override
     public Basket removeProduct(Long userId, Long productId, int count) {
-        return null;
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotExists::new);
+        double productPrice = product.getPrice();
+
+        Basket basket = basketRepository.findBasketByUserIdAndPaid(userId, false).orElse(new Basket());
+        List<LineOfBasket> lineOfBasketList = basket.getList();
+
+        if (count < 0) throw new WrongProductCount("Недопустимо отрицательное значение количества товара");
+
+        for (LineOfBasket lob : lineOfBasketList ){
+            if (count > lob.getCount()) throw new WrongProductCount("В корзине недостаточное количество товара");
+            if (product.getId().equals(lob.getProduct().getId())){
+                lob.setCount(lob.getCount() - count);
+                lob.setPositionCost((lob.getCount() - count) * productPrice);
+                product.setCount(product.getCount() + count);
+                productRepository.save(product);
+                basketRepository.save(basket);
+                return basket;
+            }
+        }
+        basketRepository.save(basket);
+        return basket;
     }
 
     @Override
     public Basket getBasket(Long userId) {
-        return null;
+        return basketRepository.findBasketByUserIdAndPaid(userId, false).orElse(new Basket());
     }
 
     @Override
     public Double getTotalCost(Long userId) {
-        return null;
+        Basket basket = basketRepository.findBasketByUserIdAndPaid(userId, false).orElse(new Basket());
+        List<LineOfBasket> lineOfBasketList = basket.getList();
+        return lineOfBasketList
+                .stream()
+                .map(lob -> lob.getPositionCost())
+                .reduce(0.0, Double::sum);
     }
 }

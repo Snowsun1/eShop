@@ -1,5 +1,6 @@
 package com.example.eshop.service;
 
+import com.example.eshop.exception.ProductNotExists;
 import com.example.eshop.model.Product;
 import com.example.eshop.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +49,17 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Iterable<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public void increaseCount(long productId, int count) {
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotExists::new);
+        product.setCount(product.getCount() + count);
+    }
+
+    @Override
+    public void decreaseCount(long productId, int count) {
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotExists::new);
+        product.setCount(product.getCount() - count);
     }
 }
