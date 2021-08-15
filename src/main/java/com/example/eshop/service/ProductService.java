@@ -22,4 +22,8 @@ public interface ProductService {
 
     @NotNull
     Iterable<Product> getAllProducts();
+
+    void increaseCount(long productId, int count);
+
+    void decreaseCount(long productId, int count);
 }
