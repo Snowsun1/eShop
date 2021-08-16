@@ -32,5 +32,6 @@ public class UserServiceImpl implements UserService {
         thisUser.setEmail(user.getEmail());
         thisUser.setBalance(user.getBalance()); // Стоит ли
         thisUser.setSurname(user.getSurname());
+        userRepository.save(thisUser);
     }
 }
