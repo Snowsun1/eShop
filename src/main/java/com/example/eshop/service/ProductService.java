@@ -26,4 +26,6 @@ public interface ProductService {
     void increaseCount(long productId, int count);
 
     void decreaseCount(long productId, int count);
+
+    int getAvailableProducts(long productId);
 }

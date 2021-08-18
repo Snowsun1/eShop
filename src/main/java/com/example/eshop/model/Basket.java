@@ -1,6 +1,9 @@
 package com.example.eshop.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +13,9 @@ import java.util.List;
 @Entity
 @Table(name = "basket", schema = "eshop")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Basket {
     @Column(name = "basket_id")
     @Id

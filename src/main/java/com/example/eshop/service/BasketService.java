@@ -1,7 +1,6 @@
 package com.example.eshop.service;
 
 import com.example.eshop.model.Basket;
-import com.example.eshop.model.Product;
 
 public interface BasketService {
 
@@ -12,4 +11,6 @@ public interface BasketService {
     Basket getBasket(Long userId);
 
     Double getTotalCost(Long userId);
+
+    void makePayment(Long userId);
 }

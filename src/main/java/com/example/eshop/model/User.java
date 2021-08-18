@@ -1,6 +1,7 @@
 package com.example.eshop.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,11 +13,12 @@ import javax.validation.constraints.Email;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
     @Column(name = "user_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -29,7 +31,7 @@ public class User {
     private String email;
 
     @Column(name = "balance", nullable = false)
-    private int balance;
+    private double balance;
 
     @Column(name = "address", nullable = false)
     private String address;

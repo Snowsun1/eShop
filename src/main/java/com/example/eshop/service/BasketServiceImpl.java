@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Data
@@ -95,11 +96,24 @@ public class BasketServiceImpl implements BasketService{
 
     @Override
     public Double getTotalCost(Long userId) {
-        Basket basket = basketRepository.findBasketByUserIdAndPaid(userId, false).orElse(new Basket());
+        Basket basket = basketRepository
+                .findBasketByUserIdAndPaid(userId, false)
+                .orElse(new Basket());
         List<LineOfBasket> lineOfBasketList = basket.getList();
         return lineOfBasketList
                 .stream()
-                .map(lob -> lob.getPositionCost())
+                .map(LineOfBasket::getPositionCost)
                 .reduce(0.0, Double::sum);
+    }
+
+    @Override
+    public void makePayment(Long userId){
+        Optional<Basket> optionalBasket = basketRepository
+                .findBasketByUserIdAndPaid(userId, false);
+        if (optionalBasket.isPresent()){
+            Basket basket = optionalBasket.get();
+            basket.setPaid(true);
+            basketRepository.save(basket);
+        }
     }
 }

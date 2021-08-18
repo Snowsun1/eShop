@@ -23,8 +23,9 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product editProduct(Product product, Long id) {
-        Product newProduct = productRepository.findById(id).orElse(null);
+    public Product editProduct(Product product, Long productId) {
+        Product newProduct = productRepository
+                .findById(productId).orElse(null);
 
         if (product != null){
             newProduct.setName(product.getName());
@@ -53,13 +54,25 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void increaseCount(long productId, int count) {
-        Product product = productRepository.findById(productId).orElseThrow(ProductNotExists::new);
+        Product product = productRepository
+                .findById(productId)
+                .orElseThrow(ProductNotExists::new);
         product.setCount(product.getCount() + count);
     }
 
     @Override
     public void decreaseCount(long productId, int count) {
-        Product product = productRepository.findById(productId).orElseThrow(ProductNotExists::new);
+        Product product = productRepository
+                .findById(productId)
+                .orElseThrow(ProductNotExists::new);
         product.setCount(product.getCount() - count);
+    }
+
+    @Override
+    public int getAvailableProducts(long productId){
+        Product product = productRepository
+                .findById(productId)
+                .orElseThrow(ProductNotExists::new);
+        return product.getCount();
     }
 }
