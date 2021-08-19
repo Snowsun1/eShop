@@ -12,5 +12,5 @@ public interface BasketService {
 
     Double getTotalCost(Long userId);
 
-    void makePayment(Long userId);
+    boolean makePayment(Long userId);
 }

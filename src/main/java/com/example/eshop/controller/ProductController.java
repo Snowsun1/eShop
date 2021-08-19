@@ -14,16 +14,16 @@ import javax.validation.constraints.NotNull;
  */
 
 @RestController
-@RequestMapping("/api")
+// @RequestMapping("/api")
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/product/{id}")
     public Product getProduct(@PathVariable Long id){
         return productService.getProduct(id);
     }
@@ -32,6 +32,4 @@ public class ProductController {
     public @NotNull Iterable<Product> getProducts(){
         return productService.getAllProducts();
     }
-
-    // to do: add post, get and put requests for other methods.
 }

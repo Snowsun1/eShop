@@ -107,13 +107,15 @@ public class BasketServiceImpl implements BasketService{
     }
 
     @Override
-    public void makePayment(Long userId){
+    public boolean makePayment(Long userId){
         Optional<Basket> optionalBasket = basketRepository
                 .findBasketByUserIdAndPaid(userId, false);
         if (optionalBasket.isPresent()){
             Basket basket = optionalBasket.get();
             basket.setPaid(true);
             basketRepository.save(basket);
+            return true;
         }
+        return false;
     }
 }

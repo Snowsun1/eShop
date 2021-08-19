@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * Add implementation for product service.
  */
@@ -44,7 +46,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product getProduct(Long id) {
-        return productRepository.findById(id).orElseThrow();
+        return productRepository.findById(id).orElse(null);
     }
 
     @Override
