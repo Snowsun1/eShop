@@ -1,8 +1,6 @@
 package com.example.eshop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -10,6 +8,7 @@ import javax.validation.constraints.Email;
 @Entity
 @Table(name = "user", schema = "eshop")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -29,7 +28,7 @@ public class User {
     private String email;
 
     @Column(name = "balance", nullable = false)
-    private int balance;
+    private double balance;
 
     @Column(name = "address", nullable = false)
     private String address;

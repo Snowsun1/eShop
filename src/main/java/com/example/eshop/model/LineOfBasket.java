@@ -1,6 +1,7 @@
 package com.example.eshop.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "line_of_basket", schema = "eshop")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class LineOfBasket {

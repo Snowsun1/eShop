@@ -1,6 +1,7 @@
 package com.example.eshop.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "product", schema = "eshop")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {

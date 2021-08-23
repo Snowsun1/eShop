@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface LineOfBasketRepository extends CrudRepository<LineOfBasket, Long> {
     Optional<LineOfBasket> findLineOfBasketById(Long id);
-    @Query(value = "select * from line_of_basket where basket_id == ?1", nativeQuery = true)
+    @Query(value = "select * from eshop.line_of_basket where basket_id = ?1", nativeQuery = true)
     Optional<List<LineOfBasket>> findLineOfBasketByBasketId(Long id);
 }
