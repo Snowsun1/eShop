@@ -19,7 +19,7 @@ public class Basket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "total_cost")
     private double cost;
 
     @Column

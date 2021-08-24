@@ -16,8 +16,8 @@ class LineOfBasketRepositoryTest {
     @Autowired
     private LineOfBasketRepository lineOfBasketRepository;
     @Test
-//    @Sql("/sql/testScriptForTableDeletion.sql")
-    @Sql("/sql/testSqlLineOfBasketRepository.sql")
+    @Sql(scripts = {//"/sql/testScriptForTableDeletion.sql",
+            "/sql/testSqlLineOfBasketRepository.sql"})
     void findLineOfBasketByBasketId() {
         log.info("test select findLineOfBasketByBasketId");
         ProductCategory productCategory = ProductCategory.builder()
@@ -34,7 +34,6 @@ class LineOfBasketRepositoryTest {
         LineOfBasket actual = LineOfBasket.builder()
                 .id(1L)
                 .count(3)
-                .positionCost(0.0)
                 .product(product)
                 .build();
         var lineOfBasket = lineOfBasketRepository.findLineOfBasketByBasketId(1L).orElse(null);
