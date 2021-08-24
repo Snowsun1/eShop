@@ -40,12 +40,14 @@ class LineOfBasketTest {
         LineOfBasket actual = lineOfBasketRepository.save(LineOfBasket.builder()
                 .count(4)
                 .product(product)
+                .positionCost(1.0)
                 .build());
 
         LineOfBasket expected = LineOfBasket.builder()
                 .id(actual.getId())
                 .count(4)
                 .product(product)
+                .positionCost(1.0)
                 .build();
 
         assertEquals(expected, actual);

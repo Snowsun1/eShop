@@ -35,6 +35,7 @@ class LineOfBasketRepositoryTest {
                 .id(1L)
                 .count(3)
                 .product(product)
+                .positionCost(1.0)
                 .build();
         var lineOfBasket = lineOfBasketRepository.findLineOfBasketByBasketId(1L).orElse(null);
         assert lineOfBasket != null;

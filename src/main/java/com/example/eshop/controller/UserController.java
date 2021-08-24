@@ -29,7 +29,7 @@ public class UserController {
         return "User " + user.getName() + " saved!";
     }
 
-    @PostMapping("/edit-user/{id}")
+    @PutMapping("/edit-user/{id}")
     public String editUser(@Valid @RequestBody User user, @PathVariable Long id) {
         try{
             userService.editUser(user, id);

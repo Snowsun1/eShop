@@ -53,6 +53,7 @@ class BasketTest {
         LineOfBasket lineOfBasket = lineOfBasketRepository.save(LineOfBasket.builder()
                 .count(4)
                 .product(product)
+                .positionCost(1.0)
                 .build());
         List<LineOfBasket> lineOfBasketList = new ArrayList<>();
         lineOfBasketList.add(lineOfBasket);
