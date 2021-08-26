@@ -26,20 +26,25 @@ public class BasketServiceImpl implements BasketService{
 
     @Override
     public Basket addProduct(Long userId, Long productId, int count) {
-        Product product = productRepository.findById(productId).orElseThrow(ProductNotExists::new);
+        Product product = productRepository
+                .findById(productId)
+                .orElseThrow(ProductNotExists::new);
         double productPrice = product.getPrice();
 
         if (count > product.getCount()) throw new WrongProductCount("На складе недостаточное количество товара");
         if (count < 0) throw new WrongProductCount("Недопустимо отрицательное значение количества товара");
 
-        Basket basket = basketRepository.findBasketByUserIdAndPaid(userId, false).orElse(new Basket());
+        Basket basket = basketRepository
+                .findBasketByUserIdAndPaid(userId, false)
+                .orElse(new Basket());
 
         List<LineOfBasket> lineOfBasketList = basket.getList();
 
         for (LineOfBasket lob : lineOfBasketList ){
             if (product.getId().equals(lob.getProduct().getId())){
                 lob.setCount(lob.getCount() + count);
-                lob.setPositionCost((lob.getCount() + count) * productPrice);
+                lob.setPositionCost((lob.getCount() + count)
+                        * productPrice);
                 // уменьшить количество товара на складе
                 product.setCount(product.getCount() - count);
                 productRepository.save(product);
@@ -85,13 +90,15 @@ public class BasketServiceImpl implements BasketService{
                 return basket;
             }
         }
-        basketRepository.save(basket);
-        return basket;
+         basketRepository.save(basket);
+         return basket;
     }
 
     @Override
     public Basket getBasket(Long userId) {
-        return basketRepository.findBasketByUserIdAndPaid(userId, false).orElse(new Basket());
+        return basketRepository
+                .findBasketByUserIdAndPaid(userId, false)
+                .orElse(new Basket());
     }
 
     @Override

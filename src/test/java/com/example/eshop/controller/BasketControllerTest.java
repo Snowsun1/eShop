@@ -99,7 +99,13 @@ class BasketControllerTest {
     }
 
     @Test
-    void add() {
+    void add() throws Exception {
+        String inputJson = mapToJson(product);
+        MvcResult mvcResult = mockMvc
+                .perform(post("/basket/1/1/5")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(inputJson))
+                .andReturn();
     }
 
     @Test
@@ -133,25 +139,27 @@ class BasketControllerTest {
 
     @Test
     void testGetTotalCost() throws Exception {
-/**
- Mockito.when(basketService.getTotalCost(user.getId()))
- .thenReturn(600.0);
 
- MvcResult mvcResult = mockMvc
- .perform(get("/basket/1")
- .contentType(MediaType.APPLICATION_JSON))
- .andReturn();
+        Mockito.when(basketService.getTotalCost(user.getId()))
+                .thenReturn(600.0);
 
- int status = mvcResult
- .getResponse()
- .getStatus();
 
- assertEquals(200, status);
 
- String content = mvcResult.getResponse().getContentAsString();
+        MvcResult mvcResult = mockMvc
+                .perform(get("/basket/TotalCost/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
 
- Double totalCost = Double.valueOf(content);
- // assertEquals(600.0, totalCost);
- */
+        int status = mvcResult
+                .getResponse()
+                .getStatus();
+
+        assertEquals(200, status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+
+        Double totalCost = Double.valueOf(content);
+        assertEquals(600.0, totalCost);
+
     }
 }
