@@ -1,6 +1,6 @@
 package com.example.eshop.service;
 
-import com.example.eshop.model.Order;
+import com.example.eshop.data.entity.Order;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;

@@ -1,6 +1,6 @@
 package com.example.eshop.service;
 
-import com.example.eshop.model.Product;
+import com.example.eshop.data.entity.Product;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Min;

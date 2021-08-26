@@ -1,6 +1,6 @@
 package com.example.eshop.controller;
 
-import com.example.eshop.model.Product;
+import com.example.eshop.data.entity.Product;
 import com.example.eshop.service.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

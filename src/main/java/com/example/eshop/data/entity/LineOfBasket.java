@@ -1,15 +1,13 @@
-package com.example.eshop.model;
+package com.example.eshop.data.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "line_of_basket", schema = "eshop")
 @Data
+@EqualsAndHashCode
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

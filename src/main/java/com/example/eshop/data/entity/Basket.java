@@ -1,15 +1,15 @@
-package com.example.eshop.model;
+package com.example.eshop.data.entity;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
 @Table(name = "basket", schema = "eshop")
 @Data
+@EqualsAndHashCode
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,7 +32,8 @@ public class Basket {
     @JoinColumn(name = "user_id") // oto
     private User user;
 
+    @EqualsAndHashCode.Exclude
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE})
     @JoinColumn(name = "basket_id")
-    private List<LineOfBasket> list = new ArrayList<>();
+    private List<LineOfBasket> list;
 }

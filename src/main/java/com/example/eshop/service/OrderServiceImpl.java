@@ -1,7 +1,7 @@
 package com.example.eshop.service;
 
-import com.example.eshop.model.Order;
-import com.example.eshop.repository.OrderRepository;
+import com.example.eshop.data.entity.Order;
+import com.example.eshop.data.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

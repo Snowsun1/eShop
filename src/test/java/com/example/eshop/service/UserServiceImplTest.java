@@ -1,7 +1,8 @@
 package com.example.eshop.service;
 
-import com.example.eshop.model.User;
-import com.example.eshop.repository.UserRepository;
+import com.example.eshop.exception.UserNotFoundException;
+import com.example.eshop.data.entity.User;
+import com.example.eshop.data.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,7 +22,7 @@ class UserServiceImplTest {
     UserRepository userRepository;
 
 
-    User user;
+    private User user;
 
     @BeforeEach
     void setup() {
@@ -40,16 +41,16 @@ class UserServiceImplTest {
 
     @Test
     void getUser() {
-
+        User optionalUser = userRepository.findUserById(1L).orElseThrow(()->new UserNotFoundException("Юзер с таким айди не найден"));
+        User actual = userService.getUser(optionalUser.getId());
+        assertEquals(actual, optionalUser);
     }
 
 
 
     @Test
     void saveUser() {
-    }
-
-    @Test
-    void editUser() {
+        userService.saveUser(user);
+        assertNotNull(userRepository.findAll());
     }
 }

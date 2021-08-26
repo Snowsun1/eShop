@@ -1,11 +1,11 @@
-package com.example.eshop.model;
+package com.example.eshop.data;
 
-import com.example.eshop.repository.*;
+import com.example.eshop.data.entity.*;
+import com.example.eshop.data.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +55,10 @@ class BasketTest {
                 .product(product)
                 .positionCost(1.0)
                 .build());
+
         List<LineOfBasket> lineOfBasketList = new ArrayList<>();
         lineOfBasketList.add(lineOfBasket);
+
         Basket actual = basketRepository.save(
             Basket.builder()
                     .paid(false)

@@ -1,6 +1,6 @@
 package com.example.eshop.controller;
 
-import com.example.eshop.model.User;
+import com.example.eshop.data.entity.User;
 import com.example.eshop.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,16 +23,16 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user")
+    @PostMapping("/create-user")
     public String createUser(@Valid @RequestBody User user) {
         userService.saveUser(user);
         return "User " + user.getName() + " saved!";
     }
 
-    @PutMapping("/edit-user/{id}")
-    public String editUser(@Valid @RequestBody User user, @PathVariable Long id) {
+    @PutMapping("/edit-user")
+    public String editUser(@Valid @RequestBody User user) {
         try{
-            userService.editUser(user, id);
+            userService.saveUser(user);
             return "User data changed";
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There's no user with this id");

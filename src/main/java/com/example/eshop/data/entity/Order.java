@@ -1,11 +1,8 @@
-package com.example.eshop.model;
+package com.example.eshop.data.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "aorder", schema = "eshop")
 @Data
+@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

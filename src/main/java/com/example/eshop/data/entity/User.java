@@ -1,4 +1,4 @@
-package com.example.eshop.model;
+package com.example.eshop.data.entity;
 
 import lombok.*;
 
@@ -6,11 +6,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
-@Table(name = "user", schema = "eshop")
+@Table(name = "auser", schema = "eshop")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class User {
     @Column(name = "user_id")
     @Id
