@@ -99,19 +99,29 @@ class BasketControllerTest {
     }
 
     @Test
-    void add() throws Exception {
-        String inputJson = mapToJson(product);
+    void testAdd() throws Exception {
+        String inputJson = mapToJson(basket);
         MvcResult mvcResult = mockMvc
                 .perform(post("/basket/1/1/5")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(inputJson))
                 .andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
     }
 
     @Test
-    void update() throws Exception {
+    void testUpdate() throws Exception {
+        String inputJson = mapToJson(basket);
+        MvcResult mvcResult = mockMvc
+                .perform(put("/basket/1/1/5")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(inputJson))
+                .andReturn();
 
-
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
     }
 
     @Test
