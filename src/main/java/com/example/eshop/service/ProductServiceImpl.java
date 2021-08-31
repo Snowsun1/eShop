@@ -1,8 +1,8 @@
 package com.example.eshop.service;
 
+import com.example.eshop.data.entity.Product;
+import com.example.eshop.data.repository.ProductRepository;
 import com.example.eshop.exception.ProductNotExists;
-import com.example.eshop.model.Product;
-import com.example.eshop.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
