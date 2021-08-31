@@ -94,7 +94,7 @@ class BasketServiceImplTest {
                 .paid(false)
                 .delivery(false)
                 .user(user)
-                .list(Collections.emptyList())
+                .list(null)
                 .build();
 
         Mockito.when(basketRepository.findBasketByUserIdAndPaid(
@@ -114,7 +114,6 @@ class BasketServiceImplTest {
         int count = basketAddProduct.getList().get(0).getCount();
         assertEquals(12, count);
     }
-
 
     @Test
     void testRemoveProduct() {

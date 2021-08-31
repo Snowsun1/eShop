@@ -40,31 +40,35 @@ public class BasketServiceImpl implements BasketService{
 
         List<LineOfBasket> lineOfBasketList = basket.getList();
 
-        for (LineOfBasket lob : lineOfBasketList ){
-            if (product.getId().equals(lob.getProduct().getId())){
-                lob.setCount(lob.getCount() + count);
-                lob.setPositionCost((lob.getCount() + count)
-                        * productPrice);
-                // уменьшить количество товара на складе
-                product.setCount(product.getCount() - count);
-                productRepository.save(product);
-                basketRepository.save(basket);
-                return basket;
+        if (lineOfBasketList != null){
+            for (LineOfBasket lob : lineOfBasketList ){
+                if (product.getId().equals(lob.getProduct().getId())){
+                    lob.setCount(lob.getCount() + count);
+                    lob.setPositionCost((lob.getCount() + count)
+                            * productPrice);
+                    // уменьшить количество товара на складе
+                    product.setCount(product.getCount() - count);
+                    productRepository.save(product);
+                    basketRepository.save(basket);
+                    return basket;
+                }
             }
+        }else {
+            // если таки продукта в корзине не оказалось
+            LineOfBasket line = new LineOfBasket();
+            line.setProduct(product);
+            line.setCount(count);
+            line.setPositionCost(count * productPrice);
+
+            // уменьшить количество товара на складе
+            product.setCount(product.getCount() - count);
+            productRepository.save(product);
+
+            basket.getList().add(line);
+            basketRepository.save(basket);
         }
 
-        // если таки продукта в корзине не оказалось
-        LineOfBasket line = new LineOfBasket();
-        line.setProduct(product);
-        line.setCount(count);
-        line.setPositionCost(count * productPrice);
 
-        // уменьшить количество товара на складе
-        product.setCount(product.getCount() - count);
-        productRepository.save(product);
-
-        basket.getList().add(line);
-        basketRepository.save(basket);
 
         return basket;
     }
