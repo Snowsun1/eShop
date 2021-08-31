@@ -1,17 +1,17 @@
-package com.example.eshop.model;
+package com.example.eshop.data.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
-@Table(name = "user", schema = "eshop")
+@Table(name = "auser", schema = "eshop")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class User {
     @Column(name = "user_id")
     @Id
@@ -29,7 +29,7 @@ public class User {
     private String email;
 
     @Column(name = "balance", nullable = false)
-    private int balance;
+    private double balance;
 
     @Column(name = "address", nullable = false)
     private String address;

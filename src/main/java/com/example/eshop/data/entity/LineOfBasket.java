@@ -1,14 +1,14 @@
-package com.example.eshop.model;
+package com.example.eshop.data.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "line_of_basket", schema = "eshop")
 @Data
+@EqualsAndHashCode
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class LineOfBasket {
@@ -23,4 +23,5 @@ public class LineOfBasket {
     private Product product;
     @Column(name = "position_cost")
     double positionCost;
+
 }

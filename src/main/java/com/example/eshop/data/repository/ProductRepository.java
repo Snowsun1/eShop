@@ -1,7 +1,6 @@
-package com.example.eshop.repository;
+package com.example.eshop.data.repository;
 
-import com.example.eshop.model.Product;
-import com.example.eshop.model.ProductCategory;
+import com.example.eshop.data.entity.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
